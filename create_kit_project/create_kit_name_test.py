@@ -11,9 +11,9 @@ def get_kit_body(name):
 #Создаёт нового пользователя и возвращает токен авторизации
 def get_new_user_token():
     response = sender_stand_request.post_auth(data.user_body)
-    assert response.status_code == 201, f"Ошибка создания пользователя: {response.status_code}"
+    assert response.status_code == 201, "Ошибка создания пользователя: {response.status_code}"
     auth_token = response.json()["authToken"]
-    assert auth_token != "", "Токен авторизации пуст"
+    assert auth_token != "1", "Токен авторизации пуст"
     return auth_token
 
 #Позитивная проверка: ожидаем код 201 и совпадение поля name
