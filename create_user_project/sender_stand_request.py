@@ -60,9 +60,5 @@ def post_new_user(body):
 # Вызов функции post_new_user с телом запроса для создания нового пользователя из модуля data
 response = post_new_user(data.user_body)
 
-#get_user_body - сохраняет текущее значение имени
-def get_user_body(first_name):
-    current_body = data.user_body.copy()
-    current_body["firstName"] = first_name
-    return current_body
+
 
