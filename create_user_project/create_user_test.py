@@ -14,19 +14,15 @@ def positive_assert(first_name):
     user_body = get_user_body(first_name)
     # В переменную user_response сохраняется результат запроса на создание пользователя:
     user_response = sender_stand_request.post_new_user(user_body)
-    
     # Проверяется, что код ответа равен 201
     assert user_response.status_code == 201
     # Проверяется, что в ответе есть поле authToken и оно не пустое
     assert user_response.json()["authToken"] != ""
-    
     # В переменную users_table_response сохраняется результат запроса 
     users_table_response = sender_stand_request.get_users_table()
-    
     # Строка, которая должна быть в ответе 
     str_user = user_body["firstName"] + "," + user_body["phone"] + "," \
             + user_body["address"] + ",,," + user_response.json()["authToken"]
-    
     # Проверка, что такой пользователь есть и он единственный
     assert users_table_response.text.count(str_user) == 1
     
@@ -34,7 +30,6 @@ def positive_assert(first_name):
 def negative_assert_symbol(first_name):
     # В переменную user_body сохраняется обновлённое тело запроса
     user_body = get_user_body(first_name)
-    
     # В переменную response сохраняется результат 
     response = sender_stand_request.post_new_user(user_body)    
     # Проверяется, что код ответа равен 400
@@ -50,10 +45,8 @@ def negative_assert_symbol(first_name):
 def negative_assert_no_firstname(user_body):
     # В переменную response сохраняется результат 
     response = sender_stand_request.post_new_user(user_body)
-    
     # Проверяется, что код ответа равен 400
     assert response.status_code == 400
-    
     # Проверяется, что в теле ответа атрибут "code" равен 400
     assert response.json()["code"] == 400
     # Проверяется текст в теле ответа в атрибуте "message"
@@ -118,7 +111,6 @@ def test_create_user_number_type_first_name_get_error_response():
     user_body = get_user_body(12)
     # В переменную user_response сохраняется результат запроса на создание пользователя:
     response = sender_stand_request.post_new_user(user_body)
-    
     # Проверка кода ответа
     assert response.status_code == 400
     
